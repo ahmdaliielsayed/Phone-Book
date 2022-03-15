@@ -35,7 +35,6 @@ $(document).ready(function() {
         if(currentEntry !== ""){
             var e = getEntryFromDisplayName(currentEntry);
             fillEditEntry(e);
-            //displayEntryList("#list");
         }
     });
     $("#saveEdit").click(function() {
@@ -75,16 +74,17 @@ function fillEditEntry(e)
     $("#phone_edit").val(e.phone);
     if(e.gender === "female")
     {
-        console.log("if true female************");
-        //genderType
-        $("#genderTypeEdit").value = "on";
-        $("#genderTypeEdit").slider({
-            value: $("#setFemale").val(),
-            // setup the rest ...
-        });  
-       // $("#genderType").selectmenu('refresh');
-        type = document.getElementById('genderTypeEdit').value;
-        console.log(type + "   type");
+        typeEdit = "on";
+        $("#genderTypeEdit").val("on");
+        $("#fild2tdTable").trigger("create");
+        $("#genderTypeEdit").slider().slider("refresh");  
+    }
+    else
+    {
+        typeEdit = "off"
+        $("#genderTypeEdit").val("off");
+        $("#fild2tdTable").trigger("create");
+        $("#genderTypeEdit").slider().slider("refresh");  
     }
 
 }
@@ -140,7 +140,6 @@ function addEntry(name, phone, email, gender, image) {
 function entryList(){
     var index, list = "";
     for(index = 0; index < entries.length; index += 1){
-        console.log( entries[index].name);
         list += "<li id=" + index + "> <a  id=listName href=#view><img src=" + entries[index].image + "><h2>" + entries[index].name + "</h2><a href=tel:" + entries[index].phone + " data-rel=popup data-position-to=window data-transition=slidedown class=ui-icon-phone>Contact</a></a></li>";
     }
     return list;
