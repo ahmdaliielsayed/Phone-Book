@@ -121,14 +121,14 @@
 						<tr>
 							<td><label for="select-based-flipswitch">Gender: </label></td>
 							<td>
-								<select name="flip2" id="genderType" data-role="slider" onchange="getOption()">
+								<select name="flip2" id="genderTypeEdit" data-role="slider" onchange="getOption()">
 									<option value="off" id="setMale">Male</option>
 									<option value="on" id="setFemale">Female</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<td><input type="submit" data-role="button" value="Save" data-icon="check"></td>
+							<td><a href="#home" data-transition="flip"><input type="button" id = "saveEdit" data-role="button" value="Save" data-icon="check"></a></td>
 							<td><a href="#home" data-transition="flip"><input type="button" data-role="button" value="Cancel" data-icon="forbidden"></a></td>
 						</tr>
 					</table>

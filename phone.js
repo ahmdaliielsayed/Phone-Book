@@ -35,8 +35,14 @@ $(document).ready(function() {
         if(currentEntry !== ""){
             var e = getEntryFromDisplayName(currentEntry);
             fillEditEntry(e);
-            currentEntry = "";
             //displayEntryList("#list");
+        }
+    });
+    $("#saveEdit").click(function() {
+        if(currentEntry !== ""){
+            var e = getEntryFromDisplayName(currentEntry);
+            updateEntry(e);
+            displayEntryList("#list");
         }
     });
 
@@ -44,6 +50,24 @@ $(document).ready(function() {
 
 var type;
 var img;
+
+function updateEntry(e){
+    e.name = $("#name_edit").val();
+   
+    e.mobile = $("#phone_edit").val();
+    e.email = $("#email_edit").val();
+    //currentEntry = $("#name_edit").val();
+    if (type == "on") {
+        e.gender = "female";
+        e.image = "1.png";
+    } else {
+        e.gender = "male";
+        e.image = "2.png";
+    }
+    console.log( entries.length + "   AfterUPdate");
+  //  displayEntryList("#list");
+}
+
 function fillEditEntry(e)
 {
     console.log(e);
@@ -54,12 +78,14 @@ function fillEditEntry(e)
     {
         console.log("if true female************");
         //genderType
-        $("#genderType").value = "on";
-        $('#genderType').slider('refresh');
-        type = document.getElementById('genderType').value;
-       // $("#setFemale").attr("style", "width:100%");
-        //$("#setmale").attr("style", "width:0%");
-        console.log(type + "   #######");
+        $("#genderTypeEdit").value = "on";
+        $("#genderTypeEdit").slider({
+            value: $("#setFemale").val(),
+            // setup the rest ...
+        });  
+       // $("#genderType").selectmenu('refresh');
+        type = document.getElementById('genderTypeEdit').value;
+        console.log(type + "   type");
     }
 
 }
@@ -112,19 +138,20 @@ function addEntry(name, phone, email, gender, image) {
 function entryList(){
     var index, list = "";
     for(index = 0; index < entries.length; index += 1){
+        console.log( entries[index].name);
         list += "<li id=" + index + "> <a  id=listName href=#view><img src=" + entries[index].image + "><h2>" + entries[index].name + "</h2><a href=tel:" + entries[index].phone + " data-rel=popup data-position-to=window data-transition=slidedown class=ui-icon-phone>Contact</a></a></li>";
     }
     return list;
 }
 
 function displayEntryList(listElement){
+   
     $(listElement).html(entryList()).listview('refresh');
     return $(listElement);
 }
 
 $(document).on('click', "#list a", function() {
    currentEntry = $(this).text();
-    console.log("data : " + currentEntry);
     var e = getEntryFromDisplayName(currentEntry);
     displayEntry(e);
 });
