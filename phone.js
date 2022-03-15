@@ -13,14 +13,12 @@ $(document).ready(function() {
     $("#add").click(function() {
         currentEntry = "";
         var e = new CurrentRow();
-        // displayEntry(e);
-        console.log("clicked");
+        displayEntry(e);
     });
 
     $("#save").click(function() {
         console.log("Save");
         if(currentEntry === ""){
-            console.log("save clicked");
             addNewEntry();
         }
         displayEntryList("#list");
@@ -32,11 +30,39 @@ $(document).ready(function() {
             displayEntryList("#list");
         }
     });
+    $("#btnEdit").click(function() {
+        console.log("Edit clicked");
+        if(currentEntry !== ""){
+            var e = getEntryFromDisplayName(currentEntry);
+            fillEditEntry(e);
+            currentEntry = "";
+            //displayEntryList("#list");
+        }
+    });
 
 });
 
 var type;
 var img;
+function fillEditEntry(e)
+{
+    console.log(e);
+    $("#name_edit").val(e.name);
+    $("#email_edit").val(e.email);
+    $("#phone_edit").val(e.phone);
+    if(e.gender === "female")
+    {
+        console.log("if true female************");
+        //genderType
+        $("#genderType").value = "on";
+        $('#genderType').slider('refresh');
+        type = document.getElementById('genderType').value;
+       // $("#setFemale").attr("style", "width:100%");
+        //$("#setmale").attr("style", "width:0%");
+        console.log(type + "   #######");
+    }
+
+}
 function getOption() {
     type = document.getElementById('genderType').value;
 }

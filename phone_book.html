@@ -88,7 +88,7 @@
 					</div>
 					<!-- Delete Dialog -->
 
-					<a href="#edit"><input type="button" data-role="button" value="Edit" data-icon="edit"></a>
+					<a href="#edit"><input type="button" id = "btnEdit" data-role="button" value="Edit" data-icon="edit"></a>
 					<a id="view-mobile-id"><input type="button" data-role="button" value="Call" data-icon="phone"></a>
 				</div>
 			</div>
@@ -108,27 +108,23 @@
 					<table>
 						<tr>
 							<td>Name</td>
-							<td><input type="text" id="name" name="name" placeholder="Name" value="Ahmed Ali" required></td>
+							<td><input type="text" id="name_edit" name="name" placeholder="Name" value="Ahmed Ali" required></td>
 						</tr>
 						<tr>
 							<td>Phone</td>
-							<td><input type="tel" id="phone" name="phone" placeholder="+20 xxx xxx xxxx" value="+20 106 320 8399" required></td>
+							<td><input type="tel" id="phone_edit" name="phone" placeholder="+20 xxx xxx xxxx" value="+20 106 320 8399" required></td>
 						</tr>
 						<tr>
 							<td>Email</td>
-							<td><input type="email" id="email" name="email" placeholder="Email Address" value="ahmdaliielsayed@gmail.com" required></td>
+							<td><input type="email" id="email_edit" name="email" placeholder="Email Address" value="ahmdaliielsayed@gmail.com" required></td>
 						</tr>
 						<tr>
 							<td><label for="select-based-flipswitch">Gender: </label></td>
 							<td>
-								<fieldset>
-									<div data-role="fieldcontain">
-										<select id="select-based-flipswitch" data-role="flipswitch">
-											<option value="m" selected>Male</option>
-											<option value="f">Female</option>
-										</select>										
-									</div>
-								</fieldset>
+								<select name="flip2" id="genderType" data-role="slider" onchange="getOption()">
+									<option value="off" id="setMale">Male</option>
+									<option value="on" id="setFemale">Female</option>
+								</select>
 							</td>
 						</tr>
 						<tr>
