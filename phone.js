@@ -125,15 +125,26 @@ function addNewEntry(){
             img = "2.png";
         }
     if(name !== "") {
+        $("#text-name").val("");
+        $("#text-phone").val("");
+        $("#text-email").val("");
+        $("#genderType").val("off");
+        $("#divSlider").trigger("create");
+        $("#genderType").slider().slider("refresh");  
         return addEntry(name, phone, email, gender, img);
     } else {
         return null;
     }
+   
+
 }
 
 function addEntry(name, phone, email, gender, image) {
-    var e = new CurrentRow(name, phone, email, gender, image);
-    entries.push(e);
+    if(name != "")
+    {
+        var e = new CurrentRow(name, phone, email, gender, image);
+        entries.push(e);
+    }
     return e;
 }
 
