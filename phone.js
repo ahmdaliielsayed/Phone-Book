@@ -47,25 +47,24 @@ $(document).ready(function() {
     });
 
 });
-
+var typeEdit;
 var type;
 var img;
 
 function updateEntry(e){
     e.name = $("#name_edit").val();
-   
-    e.mobile = $("#phone_edit").val();
+    e.phone = $("#phone_edit").val();
     e.email = $("#email_edit").val();
-    //currentEntry = $("#name_edit").val();
-    if (type == "on") {
+    if (typeEdit == "on") {
+        console.log( entries.gender + "   AfterUPdateOn");
         e.gender = "female";
         e.image = "1.png";
     } else {
+        console.log( entries.gender + "   AfterUPdateOff");
         e.gender = "male";
         e.image = "2.png";
     }
-    console.log( entries.length + "   AfterUPdate");
-  //  displayEntryList("#list");
+   
 }
 
 function fillEditEntry(e)
@@ -88,6 +87,9 @@ function fillEditEntry(e)
         console.log(type + "   type");
     }
 
+}
+function getOptionEdit() {
+    typeEdit = document.getElementById('genderTypeEdit').value;
 }
 function getOption() {
     type = document.getElementById('genderType').value;
