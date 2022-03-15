@@ -24,21 +24,36 @@ $(document).ready(function() {
             addNewEntry();
         }
         displayEntryList("#list");
-        // Whenever anything is changed, save the whole list...
-        // saveList();
+    });
+    $("#delete").click(function() {
+        if(currentEntry !== ""){
+            removeEntry(currentEntry);
+            currentEntry = "";
+            displayEntryList("#list");
+        }
     });
 
-    for(index = 0; index < entries.length; index += 1){
-        $("#" + index).click(function() {
-            console.log("hbd");
-        });
-    }
 });
 
 var type;
 var img;
 function getOption() {
     type = document.getElementById('genderType').value;
+}
+
+function removeEntry(name){
+    var pos = -1, index, entry = null;
+    for(index = 0; index < entries.length; index += 1){
+        if(name === entries[index].name) {
+            pos = index;
+            break;
+        }
+    }
+    if(pos > -1) {
+        entry = entries[pos];
+        entries.splice(pos, 1);
+    }
+    return entry;
 }
 
 function addNewEntry(){
@@ -71,7 +86,7 @@ function addEntry(name, phone, email, gender, image) {
 function entryList(){
     var index, list = "";
     for(index = 0; index < entries.length; index += 1){
-        list += "<li id=" + index + "> <a id=listName href=#view><img src=" + entries[index].image + "><h2>" + entries[index].name + "</h2><p>" + entries[index].phone + "</p><a href=tel:" + entries[index].phone + " data-rel=popup data-position-to=window data-transition=slidedown class=ui-icon-phone>Contact</a></a></li>";
+        list += "<li id=" + index + "> <a  id=listName href=#view><img src=" + entries[index].image + "><h2>" + entries[index].name + "</h2><a href=tel:" + entries[index].phone + " data-rel=popup data-position-to=window data-transition=slidedown class=ui-icon-phone>Contact</a></a></li>";
     }
     return list;
 }
@@ -82,7 +97,8 @@ function displayEntryList(listElement){
 }
 
 $(document).on('click', "#list a", function() {
-    currentEntry = $(this).text();
+   currentEntry = $(this).text();
+    console.log("data : " + currentEntry);
     var e = getEntryFromDisplayName(currentEntry);
     displayEntry(e);
 });
@@ -97,21 +113,10 @@ function getEntryFromDisplayName(displayName){
 }
 
 function displayEntry(e){
-    console.log(e.name + "nog3od");
-    
-    //$("#view-name-id").val(e.name);
-    $("#view-img-id").attr("src", e.image);
-    $("#view-mobile-id").attr("href", "tel:"+ e.phone);
-    document.getElementById("view-name-id").textContent = e.name;
-    // $("#email").val(e.email);
-    // $("#mailbutton").attr("href", "mailto:"+ e.email);
-    // $("#home").val(e.home);
-    // $("#homebutton").attr("href", "tel:"+ e.home);
-    // // This is a bit of a beast, to do with the way the HTML <input> date type
-    // // expects dates to be formatted.  We want the date only (yyyy-mm-dd) and
-    // // that dob is a full ISO date.  .toISOString() returns yyyy-mm-mm hh:mm or
-    // // something like that.  We therefore need to extract the first 10 characters
-    // // from the ISO date string...
-    // $("#bday").val(e.dob.toISOString().substring(0, 10));
-    // $("#name").text(e.name);
+    if(e != null){
+        console.log(e.name + "   name");
+        $("#view-img-id").attr("src", e.image);
+        $("#view-mobile-id").attr("href", "tel:"+ e.phone);
+        document.getElementById("view-name-id").textContent = e.name;
+    }
 }
